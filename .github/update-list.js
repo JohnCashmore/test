@@ -16,6 +16,7 @@ async function main(param) {
   const { data: repos } = await github.rest.repos.listForOrg({
     org: "esm2cjs",
     type: "forks",
+    per_page: 100
   });
 
   repos.sort((a, b) => a.name.localeCompare(b.name));
