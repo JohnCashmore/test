@@ -12,6 +12,19 @@ const listMarkerEnd = "<!-- END PACKAGES -->";
  */
 async function main(param) {
   const { github, context } = param;
+  
+  const items = await github
+  .paginate(
+    github.rest.repos.listForOrg,
+    {
+    org: "esm2cjs",
+    type: "forks",
+    per_page: 100
+  },
+    (response) => response.data
+  );
+  console.log(items);
+  
 
   const { data: repos } = await github.rest.repos.listForOrg({
     org: "esm2cjs",
